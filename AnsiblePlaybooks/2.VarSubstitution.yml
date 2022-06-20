@@ -6,10 +6,10 @@
     connection: ssh
     gather_facts: '{{ gather }}'
     vars:
-        myHosts: centos
+        myHosts: amazon-linux
         gather: yes
-        pkg: telnet  
-        sudoUser: centos    
+        pkg: telnet
+        sudoUser: ec2-user
         becomeSudoUser: yes        
     tasks:
     - name: Install telnet server on centos
