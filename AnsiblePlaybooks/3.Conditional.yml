@@ -1,6 +1,6 @@
 --- # Conditional Based PlayBook
 -  hosts: webserver
-   remote_user: centos
+   remote_user: ec2-user
    become: yes
    become_method: sudo
    connection: ssh
@@ -11,3 +11,8 @@
          name: httpd
          state: present
      when: ansible_os_family == 'RedHat'
+   - name: If Os is Ubuntu install apache2
+     apt:
+         name: apache2
+         state: present
+     when: ansible_os_family == 'Ubuntu'
