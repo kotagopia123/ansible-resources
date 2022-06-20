@@ -1,12 +1,20 @@
 --- # Create File and Add the line to the File
--  hosts: centos
+-  hosts: amazon-linux 
+   become: yes
+   become_method: sudo
+   remote_user: ec2-user
    tasks: 
    - name: create a file if does not exist
      file:
          state: touch
-         path: /home/centos/hostname.conf
+         path: /home/ec2-user/hostname.conf
    - name: If line not there then add it
      lineinfile:
             state: present
-            dest: /home/centos/hostname.conf
+            dest: /home/ec2-user/hostname.conf
             line: Hostname={{ ansible_hostname}}
+   - name: Ensure SELinux is set to enforcing mode
+     ansible.builtin.lineinfile:
+         path: /etc/selinux/config
+         regexp: '^SELINUX='
+         line: SELINUX=enforcing
