@@ -1,6 +1,6 @@
 --- # Upload the Shell Script to Remote Host and Run it.
--  hosts: centos
-   remote_user: centos
+-  hosts: amazon-linux 
+   remote_user: ec2-user
    become: yes
    become_method: sudo
    connection: ssh
@@ -8,17 +8,17 @@
    tasks: 
    -  name: Upload a file to the remote host if does not exist
       copy:
-               src: /opt/hostname.sh
-               dest: /home/centos/hostname.sh
+               src: hostname.sh
+               dest: /home/ec2-user/hostname.sh
                mode: 0755
    -  name: If line not there then add it
       lineinfile:
                state: present
-               dest: /home/centos/hostname.sh
+               dest: /home/ec2-user/hostname.sh
                regexp: '^HOSTNAME='
                line: HOSTNAME={{ ansible_hostname}}
    -  name: Run the program
-      shell: /home/centos/hostname.sh
+      shell: /home/ec2-user/hostname.sh
       register: result
    -  debug: msg="stdout={{ result }}"
        

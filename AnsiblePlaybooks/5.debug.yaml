@@ -1,12 +1,12 @@
 --- # Debugging
 -   hosts: '{{ myHosts }}'
-    remote_user: ansible
+    remote_user: ec2-user
     become: yes
     become_method: sudo
     connection: ssh
     gather_facts: '{{ gather }}'
     vars:
-        myHosts: centos
+        myHosts: amazon-linux
         gather: yes
         pkg: telnet
     tasks:
@@ -14,5 +14,5 @@
       yum:
         name: '{{ pkg }}'
         state: latest
-      register: result
-    - debug: var=result
+      register: yum_result
+    - debug: var=yum_result
