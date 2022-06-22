@@ -1,11 +1,11 @@
 --- # Multiple Itmes
--  hosts: centos
+-  hosts: amazon-linux
    become: yes
    tasks: 
    - name: Multiple Items - {{ item }}
      file:
             state: touch
-            path: /home/centos/{{ item }}
+            path: /home/ec2-user/{{ item }}
      with_items:
      - file_no_1
      - file_no_2

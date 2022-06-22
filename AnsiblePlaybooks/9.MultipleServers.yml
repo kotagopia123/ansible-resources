@@ -1,6 +1,6 @@
 --- # Multiple Tasks on Multiple Servers in Single Playbook
-- hosts: centos
-  remote_user: centos
+- hosts: amazon-linux 
+  remote_user: ec2-user
   become: yes
   become_method: sudo
   connection: ssh
@@ -12,7 +12,7 @@
     yum: pkg=telnet state=present update_cache=true
  
 - hosts: webserver
-  remote_user: centos
+  remote_user: ec2-user
   become: yes
   become_method: sudo
   connection: ssh
